@@ -2,6 +2,9 @@
 #ifndef _FILE_TOOL_
 #include "FileTool.h"
 #endif // !_FILE_TOOL_
+#ifndef _FUNCTIONAL_
+#include <functional>
+#endif
 
 namespace ScenarioSystem {
 
@@ -22,10 +25,12 @@ namespace ScenarioSystem {
 		int32_t TokenOfs;
 		int32_t TokenCnt;
 		
-		bool Load(const char* fileName);
+		bool Load(std::string fileName);
 		std::string GetString() const;
 		bool FetchToken();
 		bool IsToken(uint8_t type, uint8_t id) const;
+
+		void Foreach(std::function<void(int type, int id, int arg, int cur)> callback);
 
 		ScenarioReader() noexcept;
 		~ScenarioReader()noexcept;
