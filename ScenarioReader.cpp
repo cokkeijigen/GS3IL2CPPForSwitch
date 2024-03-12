@@ -37,22 +37,25 @@ namespace ScenarioSystem {
 		return file && file->buffer && file->size;
 	}
 
-	bool ScenarioReader::Load(const char* fileName) {
-		if (!this->Init(file::tool::read_as_ptr(fileName))) return false;
-		this->FileSize = int32_t(this->FileImage->size);
-		scen_hdr* hdr_field = (scen_hdr*)this->FileImage->buffer;
-		if (hdr_field->TokenOfs != 0x10) return false;
-		this->TokenOfs = hdr_field->TokenOfs;
-		this->IntegerTblOfs = hdr_field->IntegerTblOfs;
-		this->FloatTblOfs = hdr_field->FloatTblOfs;
-		this->StringTblOfs = hdr_field->StringTblOfs;
-		if (this->IntegerTblOfs - 0x10 >= 0) {
-			this->TokenEnd = (this->IntegerTblOfs - 0x10) >> 2;
+	bool ScenarioReader::Load(std::string file) {
+		if (this->Init(file::tool::read_as_ptr(file.c_str()))) {
+			this->FileSize = int32_t(this->FileImage->size);
+			scen_hdr* hdr_field = (scen_hdr*)this->FileImage->buffer;
+			if (hdr_field->TokenOfs != 0x10) return false;
+			this->TokenOfs = hdr_field->TokenOfs;
+			this->IntegerTblOfs = hdr_field->IntegerTblOfs;
+			this->FloatTblOfs = hdr_field->FloatTblOfs;
+			this->StringTblOfs = hdr_field->StringTblOfs;
+			if (this->IntegerTblOfs - 0x10 >= 0) {
+				this->TokenEnd = (this->IntegerTblOfs - 0x10) >> 2;
+			}
+			else {
+				this->TokenEnd = (this->IntegerTblOfs - 0x0D) >> 2;
+			}
+			return true;
 		}
-		else {
-			this->TokenEnd = (this->IntegerTblOfs - 0x0D) >> 2;
-		}
-		return true;
+		return false;
+		
 	}
 
 	bool ScenarioReader::IsToken(uint8_t type, uint8_t id) const {
@@ -83,18 +86,24 @@ namespace ScenarioSystem {
 		uint8_t* buffer = this->FileImage->buffer;
 		uint32_t length = this->FileImage->size;
 		uint32_t offset = this->StringTblOfs + this->LatestArg;
-		if (this->LatestType == 5 && this->LatestId == 3 && offset < length) {
+		if (this->IsToken(0x05, 0x03) && offset < length) {
 			if (std::string text((char*)(buffer + offset)); !text.empty()) {
+				uint8_t arg = uint8_t(this->LatestArg), val;
 				char* enc_str = (char*)text.c_str();
-				uint8_t arg = uint8_t(this->LatestArg);
 				while (*enc_str)
 				{
-					*enc_str ^= (arg | 0x3C);
+					if (val = *enc_str ^ (arg | 0x3C)) {
+						*enc_str = char(val);
+					}
 					enc_str++;
 				}
 				return text;
 			}
 		}
 		return std::string();
+	}
+
+	void ScenarioReader::Foreach(std::function<void(int type, int id, int arg, int cur)> callback) {
+		while (this->FetchToken()) callback(this->LatestType, this->LatestId, this->LatestArg, this->LatestCur);
 	}
 }
