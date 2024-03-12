@@ -12,4 +12,5 @@ struct ScriptHeader {
   }* Tokens;
 }
 ```
-在写了在写了...
+## ScenarioHelper
+This tool can re import text within game scripts. (Currently only exporting text is supported)<br>
