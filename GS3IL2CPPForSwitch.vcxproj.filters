@@ -13,27 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\tools">
+      <UniqueIdentifier>{2734ce0b-e7cb-47a6-9690-d06e785107e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Tools">
+      <UniqueIdentifier>{b9498ba3-799b-4dda-a715-288aee05169f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="gui_console.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="ScenarioReader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="gui_console.cpp">
+      <Filter>源文件\Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileTool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="gui_console.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ScenarioReader.hpp">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="filetool.h">
+      <Filter>头文件\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="gui_console.hpp">
+      <Filter>头文件\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="writebuffer.h">
+      <Filter>头文件\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="readbuffer.h">
+      <Filter>头文件\tools</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
