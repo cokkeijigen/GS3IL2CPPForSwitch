@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <filesystem>
 #include "writebuffer.h"
@@ -75,8 +75,8 @@ namespace worker {
 			sr.Foreach([&](int, int, int arg, int cur) noexcept -> void {
 				if (std::string text = sr.GetString(); !text.empty() && (*(text.c_str()) & char(128))) {
 					writebuffer.fmtwrite("#0x%04X:0x%04X:0x%02X\n", arg, cur, int(text.size() + 1));
-					writebuffer.fmtwrite(u8"¡ï¡ò  %03d  ¡ò¡ï//%s\n", count, text.c_str());
-					writebuffer.fmtwrite(u8"¡ï¡ò  %03d  ¡ò¡ï%s\n\n", count, text.c_str());
+					writebuffer.fmtwrite(u8"â˜…â—Ž  %03d  â—Žâ˜…//%s\n", count, text.c_str());
+					writebuffer.fmtwrite(u8"â˜…â—Ž  %03d  â—Žâ˜…%s\n\n", count, text.c_str());
 					count++;
 				}
 			});
