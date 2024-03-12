@@ -80,8 +80,8 @@ namespace worker {
 					count++;
 				}
 			});
-			std::string name(fsys::change(path, ".txt"));
-			std::string out(fsys::pcat(OUT_PATH, name));
+			std::string name = fsys::change(path, ".txt");
+			std::string out  = fsys::pcat(OUT_PATH, name);
 			if (writebuffer.size() && writebuffer.save(out.c_str())) {
 				gui::console::fmtcwrite(
 					"[+] Saved: %s\n", lcolor::yellow, name.c_str()
