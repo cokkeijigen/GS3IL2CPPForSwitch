@@ -136,9 +136,11 @@
     <ClCompile Include="ScenarioReader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileTool.h" />
+    <ClInclude Include="filetool.h" />
     <ClInclude Include="gui_console.hpp" />
     <ClInclude Include="ScenarioReader.hpp" />
+    <ClInclude Include="readbuffer.h" />
+    <ClInclude Include="writebuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
