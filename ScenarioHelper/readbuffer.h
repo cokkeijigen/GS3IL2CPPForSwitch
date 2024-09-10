@@ -28,7 +28,7 @@ namespace file {
             if (size > 0) tmpbuf = new uint8_t[size];
             if (pos >= bfsize) return NULL;
             if (file_ptr != nullptr && size > 0) {
-                fseek(file_ptr, 0, pos);
+                fseek(file_ptr, 0, int(pos));
                 fread(tmpbuf, 1, size, file_ptr);
             }
             else if (buffer && size > 0) {

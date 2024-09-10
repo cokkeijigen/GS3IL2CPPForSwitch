@@ -150,6 +150,8 @@ int main(int argc, char* argv[]) {
 		worker::start(argv[0], argv[1]);
 	}
 	else {
+		const char* testPath = "F:\\COKEZIGE\\StudioWork\\gs3_switch\\gs3_scenario\\scenario\\a\\TextAsset";
+		worker::start(testPath, testPath);
 		gui::console::write("\n[Error] Illegal parameter!!!\n", lcolor::red);
 	}
 	gui::console::write("\n========= [End] =========\n");
