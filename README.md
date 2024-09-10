@@ -1,15 +1,17 @@
 # GS3IL2CPPForSwitch
 ```cpp
-struct ScriptHeader {
-  int32_t TokenOfs;
-  int32_t IntegerTblOfs;
-  int32_t FloatTblOfs;
-  int32_t StringTblOfs;
-  struct {
-    uint8_t type;
-    uint8_t id;
-    int16_t offset; // Little Endian
-  }* Tokens;
+	struct ScriptHeader {
+		int32_t TokenOfs;
+		int32_t IntegerTblOfs;
+		int32_t FloatTblOfs;
+		int32_t StringTblOfs;
+		struct Token {
+			uint8_t Type, Id, v1, v2;
+			inline uint16_t&& Arg() {
+				return v2 | (v1 << 8);
+			}
+		} TokenTbl[0];
+	};
 }
 ```
 ## ScenarioHelper
