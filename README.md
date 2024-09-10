@@ -10,6 +10,10 @@
 			inline uint16_t&& Arg() {
 				return v2 | (v1 << 8);
 			}
+			inline void Arg(uint16_t arg) {
+				v1 = uint8_t(arg >> 8);
+				v2 = uint8_t(arg & 0x00FF);
+			}
 		} TokenTbl[0];
 	};
 }
