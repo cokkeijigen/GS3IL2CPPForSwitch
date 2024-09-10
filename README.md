@@ -15,7 +15,7 @@ struct ScriptHeader {
 			v2 = uint8_t(arg & 0x00FF);
 		}
 	} TokenTbl[0];
-}
+};
 ```
 ## ScenarioHelper
 This tool can re import text within game scripts. (Currently only exporting text is supported)<br>
